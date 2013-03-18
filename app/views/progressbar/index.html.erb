@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<head>
+<style>
+body {
+margin: 0px;
+padding: 0px;
+}
+</style>
+</head>
+<body>
+	<div>
+		Set Current Value: <input type="text" id="currentNum" onchange="changeCurrentNum()">
+	</div>
+	<div>
+		Set Minimum Value: <input type="text" id="minimumNum" onchange="changeMinimumNum()">
+	</div>
+	<div>
+		Set Maximum Value: <input type="text" id="maximumNum" onchange="changeMaximumNum()">
+	</div>
+	<div>
+		<%= link_to "Index of this class", :controller=>"progressbar", :action=>"index" %>
+	</div>
+  <div id="container_wrapper">
+	  <div id="container" style="border-style: solid; border-width:medium;"></div>
+	</div>
+  <div style="clear: both;"></div>
+
+	<div id="generatedHtml">
+		<div id="includeKineticJS">
+			&lt;script src=&quot;http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.3.1.min.js&quot;&gt;&lt;/script&gt;
+		</div>
+		
+		<div class="spacer" style="clear: both"></div>
+		
+		<div id="includeProgressbarJS">
+			&lt;script src=&quot;models/progressbar_models.js&quot;&gt;&lt;/script&gt;
+		</div>
+
+		<div id="startScriptTag">
+			&lt;script&gt;
+		</div>
+		
+		<div id="initiateProgressbarObj" style="margin-left: 0px;">
+			&nbsp;&nbsp;&nbsp;&nbsp;var progressbarObj = new Object;
+		</div>
+
+		<div id="initiateProgressbarFillDetails">
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			progressbarObj.progressbarFillDetails = new Object;
+		</div>
+		
+		<div id="progressbarFillDetailsNumCurrent"><!--
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			progressbarObj.progressbarFillDetails[&#039clientNumCurrent'] = 58;
+			-->
+		</div>
+
+		<div id="progressbarFillDetailsNumMax"><!--
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			progressbarObj.progressbarFillDetails[&#039clientNumCurrent'] = 58;
+			-->
+		</div>
+
+		<div id="result2"></div>
+		
+		<div id="result3"></div>
+		
+		<div id="result4"></div>
+		<div id="initiateProgressbar">
+			&nbsp;&nbsp;&nbsp;&nbsp;var progressbar = new Progressbar(progressbarObj);
+		</div>
+		
+		<div id="endScriptTag">
+			&lt;\script&gt;
+		</div>
+	</div>
+<!--
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+</script>
+-->
+<script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.3.1.min.js"></script>
+<!--
+<script src="assets/message.js"></script>
+<script src="assets/messages_container.js"></script>
+<script src="assets/anchor.js"></script>
+<script src="assets/progressbar_filling.js"></script>
+<script src="assets/ticks_organizer.js"></script>
+<script src="assets/tick.js"></script>
+<script src="assets/progressbar_object.js"></script>
+-->
+<!--
+<script src="models/progressbar_models.js"></script>
+-->
+<!--
+<script src="assets/progressbar_container.js"></script>
+<script src="assets/progressbar.js"></script>
+-->
+<script src="http://progressbar-io.googlecode.com/files/progressbario-v1.0.1.js"></script>
+<script>
+  var progressbarObj = JSON.parse('<%= raw @progressbar_obj_json %>')
+
+  function changeCurrentNum() {
+		var currentNumObj = document.getElementById("currentNum");
+		var currentNum = parseInt(currentNumObj.value);
+
+    if(progressbarObj["progressbarFillDetails"] == undefined) {
+      progressbarObj["progressbarFillDetails"] = new Object;
+    }
+    
+    progressbarObj["progressbarFillDetails"]["clientNumCurrent"] = currentNum;
+
+    $.ajax({
+      type: "POST",
+      url: "/progressbar/update",
+      data: { progressbar_obj_json: progressbarObj }
+    }).done(function() {
+
+    });
+	};
+
+	function changeMinimumNum() {
+		var minimumNumObj = document.getElementById("minimumNum");
+		var minimumNum = parseInt(minimumNumObj.value);
+
+    if(progressbarObj["progressbarFillDetails"] == undefined) {
+      progressbarObj["progressbarFillDetails"] = new Object;
+    }
+    
+    progressbarObj["progressbarFillDetails"]["clientNumMin"] = minimumNum;
+
+    $.ajax({
+      type: "POST",
+      url: "/progressbar/update",
+      data: { progressbar_obj_json: progressbarObj }
+    }).done(function() {
+
+    });
+	};
+
+	function changeMaximumNum() {
+		var maximumNumObj = document.getElementById("maximumNum");
+		var maximumNum = parseInt(maximumNumObj.value);
+
+	  if(progressbarObj["progressbarFillDetails"] == undefined) {
+      progressbarObj["progressbarFillDetails"] = new Object;
+    }
+    
+    progressbarObj["progressbarFillDetails"]["clientNumMax"] = maximumNum;
+
+    $.ajax({
+      type: "POST",
+      url: "/progressbar/update",
+      data: { progressbar_obj_json: progressbarObj }
+    }).done(function() {
+
+    });
+  };
+
+  <%= render :template=>"progressbar/update.js.erb" %>
+</script>
+
+</body>
+</html>
+
+
+
+<% if false then %>
+	<!-- THIS IS REALLY COOL, BUT CAN"T USE IT IN THIS BECAUSE IT MESSES UP MY PROGRESSBAR OBJECT -->
+  <%= link_to "Put Action", progressbar_update_path(:progressbar_obj => @progressbar_obj), :method=>:post, remote:true %>
+
+  <!-- THESE ARE THINGS I JUST DON"T NEED ANYMORE BUT ARE GOOD REFERENCE -->
+  var progressbarObj = JSON.parse('<%= raw @progressbar_obj_json %>')
+  
+  var otherObj = new Object;
+  otherObj.filling = new Object;
+  otherObj.filling["color"] = "blue";
+  var otherObjJSON = JSON.stringify(otherObj);
+  asdf = 1;
+	
+<% end %>

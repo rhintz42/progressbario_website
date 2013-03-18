@@ -1,0 +1,17 @@
+$(document).ready(function() {
+    var progressbarObj = new Object;
+    <% if @progressbar_obj_json then %>
+      progressbarObj = JSON.parse('<%= raw @progressbar_obj_json %>');
+    <% end %>
+
+    var div = $("#container");
+    div.remove();
+    
+    $("#container_wrapper").append('<div id="container"></div>');
+    
+    var progressbar = new Progressbar(progressbarObj);
+});
+
+<% if false then %>
+  <%= j render("progressbar") %>
+<% end %>
