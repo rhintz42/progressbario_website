@@ -1,5 +1,5 @@
 
-//$(document).ready(function() {
+$(document).ready(function() {
     var progressbarObj = new Object;
 
     <% if @progressbar_obj_json then %>
@@ -9,10 +9,17 @@
     var div = $("#container");
     div.remove();
     //CAN GET THE TRUE HEIGHT/WIDTH OF THE PROGRESSBAR FROM GETTING IT FROM THE progressbarObj Object
-    $("#container_wrapper").append('<div id="container" style="border: 2px solid; height: 600px; width: 600px"></div>');
+    $("#container_wrapper").append('<div id="container"\
+                                         style="border: 2px solid;\
+                                         height: 500px;\
+                                         width: 500px;\
+                                         margin-left: auto;\
+                                         margin-right: auto;\
+                                         background-color: white;">\
+                                    </div>');
     
     var progressbar = new Progressbar(progressbarObj);
-//});
+});
 
 <% if false then %>
   <%= j render("progressbar") %>

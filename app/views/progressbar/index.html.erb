@@ -124,34 +124,53 @@
 	        <a href="#tabs-3">Other</a>
         </li>
       </ul>
+      <script>
+				$(document).ready(function() {
+			    $('input[type!="button"][type!="submit"], select, textarea')
+			         .val('')
+			         .blur();
+				});
+			</script>
 
 			<div id="tabs-1">
 				<div>
-			Set Current Value: <input type="text" id="currentNum" onchange="changeCurrentNum()">
-		</div>
-		<div>
-			Set Minimum Value: <input type="text" id="minimumNum" onchange="changeMinimumNum()">
-		</div>
-		<div>
-			Set Maximum Value: <input type="text" id="maximumNum" onchange="changeMaximumNum()">
-		</div>
+					<%= label_tag(:currentNum, "Current Number") %>
+					<%= text_field_tag(:currentNum,
+														 0,
+														 :size => 14,
+														 :onchange => "changeCurrentNum();") %>
+				</div>
+				<div>
+					<%= label_tag(:minimumNum, "Minimum Number") %>
+					<%= text_field_tag(:minimumNum,
+														 0,
+														 :size => 14,
+														 :onchange => "changeMinimumNum();") %>
+				</div>
+				<div>
+					<%= label_tag(:maximumNum, "Maximum Number") %>
+					<%= text_field_tag(:maximumNum,
+														 0,
+														 :size => 14,
+														 :onchange => "changeMaximumNum();") %>
+				</div>
 			</div>
 			<div id="tabs-2">
 				<div>
-			<input type="submit" value="Add 'Percent Complete'" onclick="createPercentCompleteMessage()" />
-	  </div>
-	  <div>
-			<input type="submit" value="Add 'Percent Left'" onclick="createInversePercentCompleteMessage()" />
-	  </div>
-	  <div>
-			<input type="submit" value="Add 'Current Num'" onclick="createClientNumCurrentMessage()" />
-	  </div>
-	  <div>
-			<input type="submit" value="Add 'Min Num'" onclick="createClientNumMinMessage()" />
-	  </div>
-	  <div>
-			<input type="submit" value="Add 'Max Num'" onclick="createClientNumMaxMessage()" />
-	  </div>
+					<input type="submit" value="Add 'Percent Complete'" onclick="createPercentCompleteMessage()" />
+			  </div>
+			  <div>
+					<input type="submit" value="Add 'Percent Left'" onclick="createInversePercentCompleteMessage()" />
+			  </div>
+			  <div>
+					<input type="submit" value="Add 'Current Num'" onclick="createClientNumCurrentMessage()" />
+			  </div>
+			  <div>
+					<input type="submit" value="Add 'Min Num'" onclick="createClientNumMinMessage()" />
+			  </div>
+			  <div>
+					<input type="submit" value="Add 'Max Num'" onclick="createClientNumMaxMessage()" />
+			  </div>
 			</div>
 			<div id="tabs-3">
 				<p>Other Stuff</p>
@@ -160,219 +179,179 @@
       <div class="well">
         <div>
 
-		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-		<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+					<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+					<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
-		<script>
-		</script>
+					<script>
+					</script>
 
-	  <div id="container_wrapper">
-		  <div id="container" style="border-style: solid; border-width:medium;"></div>
-		</div>
+				  <div id="container_wrapper">
+					  <div id="container" style="border-style: solid; border-width:medium;"></div>
+					</div>
 
-	  <div style="clear: both;"></div>
+				  <div style="clear: both;"></div>
 
-		<div id="generatedHtml">
+					<div id="generatedHtml">
 
-		</div>
+					</div>
 
-		<script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.3.1.min.js"></script>
+					<script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.3.1.min.js"></script>
 
-		<!--
-		<script src="assets/message.js"></script>
-		<script src="assets/messages_container.js"></script>
-		<script src="assets/anchor.js"></script>
-		<script src="assets/progressbar_filling.js"></script>
-		<script src="assets/ticks_organizer.js"></script>
-		<script src="assets/tick.js"></script>
-		<script src="assets/progressbar_object.js"></script>
-		<script src="assets/progressbar_container.js"></script>
-		<script src="assets/progressbar.js"></script>
-		-->
-		<script src="http://progressbar-io.googlecode.com/files/progressbario-v1.0.2.js"></script>
-		
-		<script>
-		  var progressbarObj = JSON.parse('<%= raw @progressbar_obj_json %>')
+					<!--
+					<script src="assets/message.js"></script>
+					<script src="assets/messages_container.js"></script>
+					<script src="assets/anchor.js"></script>
+					<script src="assets/progressbar_filling.js"></script>
+					<script src="assets/ticks_organizer.js"></script>
+					<script src="assets/tick.js"></script>
+					<script src="assets/progressbar_object.js"></script>
+					<script src="assets/progressbar_container.js"></script>
+					<script src="assets/progressbar.js"></script>
+					-->
+					<script src="http://progressbar-io.googlecode.com/files/progressbario-v1.0.2.js"></script>
+					
 
-		  function changeCurrentNum() {
-				var currentNumObj = document.getElementById("currentNum");
-				var currentNum = parseInt(currentNumObj.value);
+					<script>
 
-		    if(progressbarObj["progressbarFillDetails"] == undefined) {
-		      progressbarObj["progressbarFillDetails"] = new Object;
-		    }
-		    
-		    progressbarObj["progressbarFillDetails"]["clientNumCurrent"] = currentNum;
+					  var progressbarObj = JSON.parse('<%= raw @progressbar_obj_json %>');
 
-		    $.ajax({
-		      type: "POST",
-		      url: "/progressbar/update",
-		      data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		    }).done(function() {
+					  function makeProgressbarObjAjaxCall() {
+					  	$.ajax({
+					      type: "POST",
+					      url: "/progressbar/update",
+					      data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
+					    }).done(function() {
 
-		    });
-			};
+					    });
+					  }
 
-			function changeMinimumNum() {
-				var minimumNumObj = document.getElementById("minimumNum");
-				var minimumNum = parseInt(minimumNumObj.value);
+					  function loadMessages() {
+					  	if(progressbarObj["messages"] == undefined) {
+					  		progressbarObj["messages"] = [];
+					  	}
+					  }
 
-		    if(progressbarObj["progressbarFillDetails"] == undefined) {
-		      progressbarObj["progressbarFillDetails"] = new Object;
-		    }
-		    
-		    progressbarObj["progressbarFillDetails"]["clientNumMin"] = minimumNum;
+					  function loadProgressbarFillDetails() {
+					  	if(progressbarObj["progressbarFillDetails"] == undefined) {
+					  		progressbarObj["progressbarFillDetails"] = new Object;
+					  	}
+					  }
 
-		    $.ajax({
-		      type: "POST",
-		      url: "/progressbar/update",
-		      data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		    }).done(function() {
+					  function changeCurrentNum() {
+							var currentNumObj = document.getElementById("currentNum");
+							var currentNum = parseInt(currentNumObj.value);
 
-		    });
-			};
+							loadProgressbarFillDetails();
+					    
+					    progressbarObj["progressbarFillDetails"]["clientNumCurrent"] = currentNum;
+					    
+					    makeProgressbarObjAjaxCall();
+						};
 
-			function changeMaximumNum() {
-				var maximumNumObj = document.getElementById("maximumNum");
-				var maximumNum = parseInt(maximumNumObj.value);
+						function changeMinimumNum() {
+							var minimumNumObj = document.getElementById("minimumNum");
+							var minimumNum = parseInt(minimumNumObj.value);
 
-			  if(progressbarObj["progressbarFillDetails"] == undefined) {
-		      progressbarObj["progressbarFillDetails"] = new Object;
-		    }
-		    
-		    progressbarObj["progressbarFillDetails"]["clientNumMax"] = maximumNum;
+					    loadProgressbarFillDetails();
+					    
+					    progressbarObj["progressbarFillDetails"]["clientNumMin"] = minimumNum;
 
-		    $.ajax({
-		      type: "POST",
-		      url: "/progressbar/update",
-		      data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		    }).done(function() {
+					    makeProgressbarObjAjaxCall();
+						};
 
-		    });
-		  };
+						function changeMaximumNum() {
+							var maximumNumObj = document.getElementById("maximumNum");
+							var maximumNum = parseInt(maximumNumObj.value);
 
-		  function createPercentCompleteMessage() {
-		  	if(progressbarObj["messages"] == undefined) {
-		  		progressbarObj["messages"] = [];
-		  	}
-		  	
-				progressbarObj.messages[0] = new Object;
-				progressbarObj.messages[0]['name'] = 'percentComplete';
-			  progressbarObj.messages[0]['x'] = 10;
-			  progressbarObj.messages[0]['y'] = 10;
-			  progressbarObj.messages[0]['title'] = 'Percent Complete';
-			  progressbarObj.messages[0]['initialText'] = 'percentComplete';
-			  progressbarObj.messages[0]['fontSize'] = 30;
-			  progressbarObj.messages[0]['fontFamily'] = 'Calibri';
-			  progressbarObj.messages[0]['fontColor'] = 'green';
+						  loadProgressbarFillDetails();
+					    
+					    progressbarObj["progressbarFillDetails"]["clientNumMax"] = maximumNum;
 
-		  	$.ajax({
-		  		type: "POST",
-		  		url: "/progressbar/update",
-		  		data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		  	}).done(function() {
+					    makeProgressbarObjAjaxCall();
+					  };
 
-		  	});
-		  };
+					  function createPercentCompleteMessage() {
+					  	loadMessages();
+					  	
+							progressbarObj.messages[0] = new Object;
+							progressbarObj.messages[0]['name'] = 'percentComplete';
+						  progressbarObj.messages[0]['x'] = 10;
+						  progressbarObj.messages[0]['y'] = 10;
+						  progressbarObj.messages[0]['title'] = 'Percent Complete';
+						  progressbarObj.messages[0]['initialText'] = 'percentComplete';
+						  progressbarObj.messages[0]['fontSize'] = 30;
+						  progressbarObj.messages[0]['fontFamily'] = 'Calibri';
+						  progressbarObj.messages[0]['fontColor'] = 'green';
 
-		  function createInversePercentCompleteMessage() {
-		  	if(progressbarObj["messages"] == undefined) {
-		  		progressbarObj["messages"] = [];
-		  	}
-		  	
-				progressbarObj.messages[1] = new Object;
-				progressbarObj.messages[1]['name'] = 'inversePercentComplete';
-			  progressbarObj.messages[1]['x'] = 10;
-			  progressbarObj.messages[1]['y'] = 10;
-			  progressbarObj.messages[1]['title'] = 'Percent Left';
-			  progressbarObj.messages[1]['initialText'] = 'percent left';
-			  progressbarObj.messages[1]['fontSize'] = 30;
-			  progressbarObj.messages[1]['fontFamily'] = 'Calibri';
-			  progressbarObj.messages[1]['fontColor'] = 'green';
+					  	makeProgressbarObjAjaxCall();
+					  };
 
-		  	$.ajax({
-		  		type: "POST",
-		  		url: "/progressbar/update",
-		  		data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		  	}).done(function() {
+					  function createInversePercentCompleteMessage() {
+					  	loadMessages();
+					  	
+							progressbarObj.messages[1] = new Object;
+							progressbarObj.messages[1]['name'] = 'inversePercentComplete';
+						  progressbarObj.messages[1]['x'] = 10;
+						  progressbarObj.messages[1]['y'] = 10;
+						  progressbarObj.messages[1]['title'] = 'Percent Left';
+						  progressbarObj.messages[1]['initialText'] = 'percent left';
+						  progressbarObj.messages[1]['fontSize'] = 30;
+						  progressbarObj.messages[1]['fontFamily'] = 'Calibri';
+						  progressbarObj.messages[1]['fontColor'] = 'green';
 
-		  	});
-		  };
+					  	makeProgressbarObjAjaxCall();
+					  };
 
-		  function createClientNumCurrentMessage() {
-		  	if(progressbarObj["messages"] == undefined) {
-		  		progressbarObj["messages"] = [];
-		  	}
-		  	
-				progressbarObj.messages[2] = new Object;
-				progressbarObj.messages[2]['name'] = 'clientNumCurrent';
-			  progressbarObj.messages[2]['x'] = 10;
-			  progressbarObj.messages[2]['y'] = 10;
-			  progressbarObj.messages[2]['title'] = 'Current Num';
-			  progressbarObj.messages[2]['initialText'] = 'current';
-			  progressbarObj.messages[2]['fontSize'] = 30;
-			  progressbarObj.messages[2]['fontFamily'] = 'Calibri';
-			  progressbarObj.messages[2]['fontColor'] = 'green';
+					  function createClientNumCurrentMessage() {
+					  	loadMessages();
+					  	
+							progressbarObj.messages[2] = new Object;
+							progressbarObj.messages[2]['name'] = 'clientNumCurrent';
+						  progressbarObj.messages[2]['x'] = 10;
+						  progressbarObj.messages[2]['y'] = 10;
+						  progressbarObj.messages[2]['title'] = 'Current Num';
+						  progressbarObj.messages[2]['initialText'] = 'current';
+						  progressbarObj.messages[2]['fontSize'] = 30;
+						  progressbarObj.messages[2]['fontFamily'] = 'Calibri';
+						  progressbarObj.messages[2]['fontColor'] = 'green';
 
-		  	$.ajax({
-		  		type: "POST",
-		  		url: "/progressbar/update",
-		  		data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		  	}).done(function() {
+					  	makeProgressbarObjAjaxCall();
+					  };
 
-		  	});
-		  };
+					  function createClientNumMinMessage() {
+					  	loadMessages();
+					  	
+							progressbarObj.messages[3] = new Object;
+							progressbarObj.messages[3]['name'] = 'clientNumMin';
+						  progressbarObj.messages[3]['x'] = 10;
+						  progressbarObj.messages[3]['y'] = 10;
+						  progressbarObj.messages[3]['title'] = 'Min Num';
+						  progressbarObj.messages[3]['initialText'] = 'min';
+						  progressbarObj.messages[3]['fontSize'] = 30;
+						  progressbarObj.messages[3]['fontFamily'] = 'Calibri';
+						  progressbarObj.messages[3]['fontColor'] = 'green';
 
-		  function createClientNumMinMessage() {
-		  	if(progressbarObj["messages"] == undefined) {
-		  		progressbarObj["messages"] = [];
-		  	}
-		  	
-				progressbarObj.messages[3] = new Object;
-				progressbarObj.messages[3]['name'] = 'clientNumMin';
-			  progressbarObj.messages[3]['x'] = 10;
-			  progressbarObj.messages[3]['y'] = 10;
-			  progressbarObj.messages[3]['title'] = 'Min Num';
-			  progressbarObj.messages[3]['initialText'] = 'min';
-			  progressbarObj.messages[3]['fontSize'] = 30;
-			  progressbarObj.messages[3]['fontFamily'] = 'Calibri';
-			  progressbarObj.messages[3]['fontColor'] = 'green';
+					  	makeProgressbarObjAjaxCall();
+					  };
 
-		  	$.ajax({
-		  		type: "POST",
-		  		url: "/progressbar/update",
-		  		data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		  	}).done(function() {
+					  function createClientNumMaxMessage() {
+					  	loadMessages();
+					  	
+							progressbarObj.messages[4] = new Object;
+							progressbarObj.messages[4]['name'] = 'clientNumMax';
+						  progressbarObj.messages[4]['x'] = 10;
+						  progressbarObj.messages[4]['y'] = 10;
+						  progressbarObj.messages[4]['title'] = 'Max Num';
+						  progressbarObj.messages[4]['initialText'] = 'max';
+						  progressbarObj.messages[4]['fontSize'] = 30;
+						  progressbarObj.messages[4]['fontFamily'] = 'Calibri';
+						  progressbarObj.messages[4]['fontColor'] = 'green';
+							
+					  	makeProgressbarObjAjaxCall();
+					  };
 
-		  	});
-		  };
-
-		  function createClientNumMaxMessage() {
-		  	if(progressbarObj["messages"] == undefined) {
-		  		progressbarObj["messages"] = [];
-		  	}
-		  	
-				progressbarObj.messages[4] = new Object;
-				progressbarObj.messages[4]['name'] = 'clientNumMax';
-			  progressbarObj.messages[4]['x'] = 10;
-			  progressbarObj.messages[4]['y'] = 10;
-			  progressbarObj.messages[4]['title'] = 'Max Num';
-			  progressbarObj.messages[4]['initialText'] = 'max';
-			  progressbarObj.messages[4]['fontSize'] = 30;
-			  progressbarObj.messages[4]['fontFamily'] = 'Calibri';
-			  progressbarObj.messages[4]['fontColor'] = 'green';
-
-		  	$.ajax({
-		  		type: "POST",
-		  		url: "/progressbar/update",
-		  		data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		  	}).done(function() {
-
-		  	});
-		  };
-
-		  <%= render :template=>"progressbar/update.js.erb" %>
-		</script>
+					  <%= render :template=>"progressbar/update.js.erb" %>
+					</script>
         </div>
       </div>
       <hr>
@@ -408,270 +387,14 @@
 
 
 
-<% if false then %>
-<!DOCTYPE HTML>
-	<head>
-		<style>
-			body {
-			margin: 0px;
-			padding: 0px;
-			}
-		</style>
-	</head>
-	<body>
-		<div>
-			Set Current Value: <input type="text" id="currentNum" onchange="changeCurrentNum()">
-		</div>
-		<div>
-			Set Minimum Value: <input type="text" id="minimumNum" onchange="changeMinimumNum()">
-		</div>
-		<div>
-			Set Maximum Value: <input type="text" id="maximumNum" onchange="changeMaximumNum()">
-		</div>
-		<div>
-			<%= link_to "Index of this class", :controller=>"progressbar", :action=>"index" %>
-		</div>
-		<!--
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
-		-->
-		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-
-		<script>
-			/*
-			$(function() {
-				$( "input[type=submit], a, button" )
-				.button()
-			});
-*/
-		</script>
-
-		<div>
-			<input type="submit" value="Add 'Percent Complete'" onclick="createPercentCompleteMessage()" />
-	  </div>
-	  <div>
-			<input type="submit" value="Add 'Percent Left'" onclick="createInversePercentCompleteMessage()" />
-	  </div>
-	  <div>
-			<input type="submit" value="Add 'Current Num'" onclick="createClientNumCurrentMessage()" />
-	  </div>
-	  <div>
-			<input type="submit" value="Add 'Min Num'" onclick="createClientNumMinMessage()" />
-	  </div>
-	  <div>
-			<input type="submit" value="Add 'Max Num'" onclick="createClientNumMaxMessage()" />
-	  </div>
-	  
-	  <div id="container_wrapper" style="width: 550px;">
-		  <div id="container" style="border-style: solid; border-width:medium;"></div>
-		</div>
-
-	  <div style="clear: both;"></div>
-
-		<div id="generatedHtml">
-
-		</div>
-
-		<script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.3.1.min.js"></script>
 
 
-		<script src="assets/message.js"></script>
-		<script src="assets/messages_container.js"></script>
-		<script src="assets/anchor.js"></script>
-		<script src="assets/progressbar_filling.js"></script>
-		<script src="assets/ticks_organizer.js"></script>
-		<script src="assets/tick.js"></script>
-		<script src="assets/progressbar_object.js"></script>
-		<script src="assets/progressbar_container.js"></script>
-		<script src="assets/progressbar.js"></script>
-	
-		<script>
-		  var progressbarObj = JSON.parse('<%= raw @progressbar_obj_json %>')
 
-		  function changeCurrentNum() {
-				var currentNumObj = document.getElementById("currentNum");
-				var currentNum = parseInt(currentNumObj.value);
 
-		    if(progressbarObj["progressbarFillDetails"] == undefined) {
-		      progressbarObj["progressbarFillDetails"] = new Object;
-		    }
-		    
-		    progressbarObj["progressbarFillDetails"]["clientNumCurrent"] = currentNum;
 
-		    $.ajax({
-		      type: "POST",
-		      url: "/progressbar/update",
-		      data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		    }).done(function() {
 
-		    });
-			};
 
-			function changeMinimumNum() {
-				var minimumNumObj = document.getElementById("minimumNum");
-				var minimumNum = parseInt(minimumNumObj.value);
 
-		    if(progressbarObj["progressbarFillDetails"] == undefined) {
-		      progressbarObj["progressbarFillDetails"] = new Object;
-		    }
-		    
-		    progressbarObj["progressbarFillDetails"]["clientNumMin"] = minimumNum;
-
-		    $.ajax({
-		      type: "POST",
-		      url: "/progressbar/update",
-		      data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		    }).done(function() {
-
-		    });
-			};
-
-			function changeMaximumNum() {
-				var maximumNumObj = document.getElementById("maximumNum");
-				var maximumNum = parseInt(maximumNumObj.value);
-
-			  if(progressbarObj["progressbarFillDetails"] == undefined) {
-		      progressbarObj["progressbarFillDetails"] = new Object;
-		    }
-		    
-		    progressbarObj["progressbarFillDetails"]["clientNumMax"] = maximumNum;
-
-		    $.ajax({
-		      type: "POST",
-		      url: "/progressbar/update",
-		      data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		    }).done(function() {
-
-		    });
-		  };
-
-		  function createPercentCompleteMessage() {
-		  	if(progressbarObj["messages"] == undefined) {
-		  		progressbarObj["messages"] = [];
-		  	}
-		  	
-				progressbarObj.messages[0] = new Object;
-				progressbarObj.messages[0]['name'] = 'percentComplete';
-			  progressbarObj.messages[0]['x'] = 10;
-			  progressbarObj.messages[0]['y'] = 10;
-			  progressbarObj.messages[0]['title'] = 'Percent Complete';
-			  progressbarObj.messages[0]['initialText'] = 'percentComplete';
-			  progressbarObj.messages[0]['fontSize'] = 30;
-			  progressbarObj.messages[0]['fontFamily'] = 'Calibri';
-			  progressbarObj.messages[0]['fontColor'] = 'green';
-
-		  	$.ajax({
-		  		type: "POST",
-		  		url: "/progressbar/update",
-		  		data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		  	}).done(function() {
-
-		  	});
-		  };
-
-		  function createInversePercentCompleteMessage() {
-		  	if(progressbarObj["messages"] == undefined) {
-		  		progressbarObj["messages"] = [];
-		  	}
-		  	
-				progressbarObj.messages[1] = new Object;
-				progressbarObj.messages[1]['name'] = 'inversePercentComplete';
-			  progressbarObj.messages[1]['x'] = 10;
-			  progressbarObj.messages[1]['y'] = 10;
-			  progressbarObj.messages[1]['title'] = 'Percent Left';
-			  progressbarObj.messages[1]['initialText'] = 'percent left';
-			  progressbarObj.messages[1]['fontSize'] = 30;
-			  progressbarObj.messages[1]['fontFamily'] = 'Calibri';
-			  progressbarObj.messages[1]['fontColor'] = 'green';
-
-		  	$.ajax({
-		  		type: "POST",
-		  		url: "/progressbar/update",
-		  		data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		  	}).done(function() {
-
-		  	});
-		  };
-
-		  function createClientNumCurrentMessage() {
-		  	if(progressbarObj["messages"] == undefined) {
-		  		progressbarObj["messages"] = [];
-		  	}
-		  	
-				progressbarObj.messages[2] = new Object;
-				progressbarObj.messages[2]['name'] = 'clientNumCurrent';
-			  progressbarObj.messages[2]['x'] = 10;
-			  progressbarObj.messages[2]['y'] = 10;
-			  progressbarObj.messages[2]['title'] = 'Current Num';
-			  progressbarObj.messages[2]['initialText'] = 'current';
-			  progressbarObj.messages[2]['fontSize'] = 30;
-			  progressbarObj.messages[2]['fontFamily'] = 'Calibri';
-			  progressbarObj.messages[2]['fontColor'] = 'green';
-
-		  	$.ajax({
-		  		type: "POST",
-		  		url: "/progressbar/update",
-		  		data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		  	}).done(function() {
-
-		  	});
-		  };
-
-		  function createClientNumMinMessage() {
-		  	if(progressbarObj["messages"] == undefined) {
-		  		progressbarObj["messages"] = [];
-		  	}
-		  	
-				progressbarObj.messages[3] = new Object;
-				progressbarObj.messages[3]['name'] = 'clientNumMin';
-			  progressbarObj.messages[3]['x'] = 10;
-			  progressbarObj.messages[3]['y'] = 10;
-			  progressbarObj.messages[3]['title'] = 'Min Num';
-			  progressbarObj.messages[3]['initialText'] = 'min';
-			  progressbarObj.messages[3]['fontSize'] = 30;
-			  progressbarObj.messages[3]['fontFamily'] = 'Calibri';
-			  progressbarObj.messages[3]['fontColor'] = 'green';
-
-		  	$.ajax({
-		  		type: "POST",
-		  		url: "/progressbar/update",
-		  		data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		  	}).done(function() {
-
-		  	});
-		  };
-
-		  function createClientNumMaxMessage() {
-		  	if(progressbarObj["messages"] == undefined) {
-		  		progressbarObj["messages"] = [];
-		  	}
-		  	
-				progressbarObj.messages[4] = new Object;
-				progressbarObj.messages[4]['name'] = 'clientNumMax';
-			  progressbarObj.messages[4]['x'] = 10;
-			  progressbarObj.messages[4]['y'] = 10;
-			  progressbarObj.messages[4]['title'] = 'Max Num';
-			  progressbarObj.messages[4]['initialText'] = 'max';
-			  progressbarObj.messages[4]['fontSize'] = 30;
-			  progressbarObj.messages[4]['fontFamily'] = 'Calibri';
-			  progressbarObj.messages[4]['fontColor'] = 'green';
-
-		  	$.ajax({
-		  		type: "POST",
-		  		url: "/progressbar/update",
-		  		data: { progressbar_obj_json: JSON.stringify(progressbarObj) }
-		  	}).done(function() {
-
-		  	});
-		  };
-
-		  <%= render :template=>"progressbar/update.js.erb" %>
-		</script>
-
-	</body>
-</html>
-
-<% end %>
 
 
 
