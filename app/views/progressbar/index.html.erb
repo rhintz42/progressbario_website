@@ -50,13 +50,18 @@
     <div class="navbar navbar-fixed-top navbar-inverse">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="#">
-            Project name
+          <a class="brand" href="/progressbar">
+            ProgressbarIO
           </a>
           <ul class="nav">
             <li>
-              <a href="#">
+              <a href="/progressbar">
                 Home
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                API
               </a>
             </li>
             <li>
@@ -70,18 +75,12 @@
               </a>
             </li>
           </ul>
-          <form class="navbar-form pull-right">
-            <input name="textinput1" placeholder="Email" class="span2" type="email">
-            <input name="textinput2" placeholder="Password" class="span2" type="password">
-            <button class="btn">
-              Sign in
-            </button>
-          </form>
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container" style="">
       <div class="hero-unit">
+        <div style="float: left;">
         <div>
           <h1>
             ProgressbarIO
@@ -93,91 +92,75 @@
         <a class="btn btn-primary" href="#">
           Learn more »
         </a>
+      	</div>
+      	<div style="float: right;">
+					<img src="assets/progressbar_pic.png" style=" width: 200px; height: 261px;">
+      	</div>
+      	<div style="clear: both;">
+      	</div>
       </div>
-      <div id="tabs">
-      <ul class="nav nav-tabs">
-        <li class="">
-          <a href="#tabs-1">Client Numbers</a>
-        </li>
-        <li class="">
-          <a href="#tabs-2">Messages</a>
-        </li>
-        <li class="">
-        	<script>
-			    	/*
-			    	$(document).ready(function() {
-			      	//var f = document.getElementById('foo');
-			      	//f.onclick = showFoo;
-
-			      	function showFoo() {
-			      		alert('I am foo!');
-			      		return false;
-			      	};
-			      });
-						*/
-			    </script>
-			    <!--
-	          <a href="#" title="Get some foo!" id="foo">
-	            Other
-	          </a>
-	        -->
-	        <a href="#tabs-3">Other</a>
-        </li>
-      </ul>
-      <script>
-				/*
-				$(document).ready(function() {
-			    $('input[type!="button"][type!="submit"], select, textarea')
-			         .val('')
-			         .blur();
-				});
-				*/
-			</script>
-
-			<div id="tabs-1">
-				<div>
-					<%= label_tag(:currentNum, "Current Number") %>
-					<%= text_field_tag(:currentNum,
-														 50,
-														 :size => 14,
-														 :onchange => "changeCurrentNum();") %>
-				</div>
-				<div>
-					<%= label_tag(:minimumNum, "Minimum Number") %>
-					<%= text_field_tag(:minimumNum,
-														 0,
-														 :size => 14,
-														 :onchange => "changeMinimumNum();") %>
-				</div>
-				<div>
-					<%= label_tag(:maximumNum, "Maximum Number") %>
-					<%= text_field_tag(:maximumNum,
-														 100,
-														 :size => 14,
-														 :onchange => "changeMaximumNum();") %>
-				</div>
-			</div>
-			<div id="tabs-2">
-				<div>
-					<input type="submit" value="Add 'Percent Complete'" onclick="createPercentCompleteMessage()" />
-			  </div>
-			  <div>
-					<input type="submit" value="Add 'Percent Left'" onclick="createInversePercentCompleteMessage()" />
-			  </div>
-			  <div>
-					<input type="submit" value="Add 'Current Num'" onclick="createClientNumCurrentMessage()" />
-			  </div>
-			  <div>
-					<input type="submit" value="Add 'Min Num'" onclick="createClientNumMinMessage()" />
-			  </div>
-			  <div>
-					<input type="submit" value="Add 'Max Num'" onclick="createClientNumMaxMessage()" />
-			  </div>
-			</div>
-			<div id="tabs-3">
-				<p>Other Stuff</p>
-			</div>
     </div>
+    <div style="width: 1000px; margin-left: auto; margin-right: auto;">
+      <div class="left" style="width: 400px; float:left;">
+	      <div id="tabs">
+	      <ul class="nav nav-tabs">
+	        <li class="">
+	          <a href="#tabs-1">Client Numbers</a>
+	        </li>
+	        <li class="">
+	          <a href="#tabs-2">Messages</a>
+	        </li>
+	        <li class="">
+		        <a href="#tabs-3">Other</a>
+	        </li>
+	      </ul>
+
+				<div id="tabs-1">
+					<div>
+						<%= label_tag(:currentNum, "Current Number") %>
+						<%= text_field_tag(:currentNum,
+															 50,
+															 :size => 14,
+															 :onchange => "changeCurrentNum();") %>
+					</div>
+					<div>
+						<%= label_tag(:minimumNum, "Minimum Number") %>
+						<%= text_field_tag(:minimumNum,
+															 0,
+															 :size => 14,
+															 :onchange => "changeMinimumNum();") %>
+					</div>
+					<div>
+						<%= label_tag(:maximumNum, "Maximum Number") %>
+						<%= text_field_tag(:maximumNum,
+															 100,
+															 :size => 14,
+															 :onchange => "changeMaximumNum();") %>
+					</div>
+				</div>
+				<div id="tabs-2">
+					<div>
+						<input type="submit" value="Add 'Percent Complete'" onclick="createPercentCompleteMessage()" />
+				  </div>
+				  <div>
+						<input type="submit" value="Add 'Percent Left'" onclick="createInversePercentCompleteMessage()" />
+				  </div>
+				  <div>
+						<input type="submit" value="Add 'Current Num'" onclick="createClientNumCurrentMessage()" />
+				  </div>
+				  <div>
+						<input type="submit" value="Add 'Min Num'" onclick="createClientNumMinMessage()" />
+				  </div>
+				  <div>
+						<input type="submit" value="Add 'Max Num'" onclick="createClientNumMaxMessage()" />
+				  </div>
+				</div>
+				<div id="tabs-3">
+					<p>Other Stuff</p>
+				</div>
+	    </div>
+	  </div>
+	  <div class="left" style="float: left;">
       <div class="well">
         <div>
 
@@ -289,13 +272,13 @@
 					  	
 							progressbarObj.messages[0] = new Object;
 							progressbarObj.messages[0]['name'] = 'percentComplete';
-						  progressbarObj.messages[0]['x'] = 10;
-						  progressbarObj.messages[0]['y'] = 10;
+						  progressbarObj.messages[0]['x'] = 20;
+						  progressbarObj.messages[0]['y'] = 20;
 						  progressbarObj.messages[0]['title'] = 'Percent Complete';
 						  progressbarObj.messages[0]['initialText'] = 'percentComplete';
 						  progressbarObj.messages[0]['fontSize'] = 30;
 						  progressbarObj.messages[0]['fontFamily'] = 'Calibri';
-						  progressbarObj.messages[0]['fontColor'] = 'green';
+						  progressbarObj.messages[0]['fontColor'] = 'black';
 
 					  	makeProgressbarObjAjaxCall();
 					  };
@@ -305,13 +288,13 @@
 					  	
 							progressbarObj.messages[1] = new Object;
 							progressbarObj.messages[1]['name'] = 'inversePercentComplete';
-						  progressbarObj.messages[1]['x'] = 10;
-						  progressbarObj.messages[1]['y'] = 10;
+						  progressbarObj.messages[1]['x'] = 20;
+						  progressbarObj.messages[1]['y'] = 20;
 						  progressbarObj.messages[1]['title'] = 'Percent Left';
 						  progressbarObj.messages[1]['initialText'] = 'percent left';
 						  progressbarObj.messages[1]['fontSize'] = 30;
 						  progressbarObj.messages[1]['fontFamily'] = 'Calibri';
-						  progressbarObj.messages[1]['fontColor'] = 'green';
+						  progressbarObj.messages[1]['fontColor'] = 'black';
 
 					  	makeProgressbarObjAjaxCall();
 					  };
@@ -321,13 +304,13 @@
 					  	
 							progressbarObj.messages[2] = new Object;
 							progressbarObj.messages[2]['name'] = 'clientNumCurrent';
-						  progressbarObj.messages[2]['x'] = 10;
-						  progressbarObj.messages[2]['y'] = 10;
+						  progressbarObj.messages[2]['x'] = 20;
+						  progressbarObj.messages[2]['y'] = 20;
 						  progressbarObj.messages[2]['title'] = 'Current Num';
 						  progressbarObj.messages[2]['initialText'] = 'current';
 						  progressbarObj.messages[2]['fontSize'] = 30;
 						  progressbarObj.messages[2]['fontFamily'] = 'Calibri';
-						  progressbarObj.messages[2]['fontColor'] = 'green';
+						  progressbarObj.messages[2]['fontColor'] = 'black';
 
 					  	makeProgressbarObjAjaxCall();
 					  };
@@ -337,13 +320,13 @@
 					  	
 							progressbarObj.messages[3] = new Object;
 							progressbarObj.messages[3]['name'] = 'clientNumMin';
-						  progressbarObj.messages[3]['x'] = 10;
-						  progressbarObj.messages[3]['y'] = 10;
+						  progressbarObj.messages[3]['x'] = 20;
+						  progressbarObj.messages[3]['y'] = 20;
 						  progressbarObj.messages[3]['title'] = 'Min Num';
 						  progressbarObj.messages[3]['initialText'] = 'min';
 						  progressbarObj.messages[3]['fontSize'] = 30;
 						  progressbarObj.messages[3]['fontFamily'] = 'Calibri';
-						  progressbarObj.messages[3]['fontColor'] = 'green';
+						  progressbarObj.messages[3]['fontColor'] = 'black';
 
 					  	makeProgressbarObjAjaxCall();
 					  };
@@ -353,13 +336,13 @@
 					  	
 							progressbarObj.messages[4] = new Object;
 							progressbarObj.messages[4]['name'] = 'clientNumMax';
-						  progressbarObj.messages[4]['x'] = 10;
-						  progressbarObj.messages[4]['y'] = 10;
+						  progressbarObj.messages[4]['x'] = 20;
+						  progressbarObj.messages[4]['y'] = 20;
 						  progressbarObj.messages[4]['title'] = 'Max Num';
 						  progressbarObj.messages[4]['initialText'] = 'max';
 						  progressbarObj.messages[4]['fontSize'] = 30;
 						  progressbarObj.messages[4]['fontFamily'] = 'Calibri';
-						  progressbarObj.messages[4]['fontColor'] = 'green';
+						  progressbarObj.messages[4]['fontColor'] = 'black';
 							
 					  	makeProgressbarObjAjaxCall();
 					  };
@@ -372,16 +355,49 @@
 					</script>
         </div>
       </div>
+    </div>
       <hr>
+
+	<div id="progressbar_output_container" style="clear:both;">
+		<div id="output_description" style="font-size: 20px;">
+			<div>
+				<p>Adding this progressbar to your site is as easy as Select, Copy and Paste!</p>
+			</div>
+			<div>
+				<p>Copy the below code and insert it into the html of your site!</p>
+			</div>
+		</div>
+
+		<div id="add_in_container">
+			&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
+		</div>
+		<div id="progressbar_output_include_kinect">
+			&lt;script src=&quot;http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.3.1.min.js&quot;&gt;&lt;/script&gt;
+		</div>
+		<div id="progressbar_output_include_progressbar_google">
+			&lt;script src=&quot;http://progressbar-io.googlecode.com/files/progressbario-v1.0.5.js&quot;&gt;&lt;/script&gt;
+		</div>
+		<div id="script_tag">
+			&lt;script&gt;
+		</div>
+		<div id="progressbar_output">
+			This is where the progressbar output goes
+		</div>
+	</div>
+	<div id="progressbar_output_container_ending" style="clear:both">
+		<div id="progressbar_obj_creation">
+			var progressbar0 = new Progressbar(progressbarInput);
+		</div>
+		<div id="script_end_tag">
+			&lt;/script&gt;
+		</div>
+	</div>
+    <div style="clear: both;">
       <div>
         © Company 2012
       </div>
     </div>
 
-
-    <style>
-      
-    </style>
     <script src="assets/js/bootstrap.js"></script>
 	</div>
 </div>
@@ -429,6 +445,35 @@
 
 
 <% if false then %>
+
+        	<script>
+			    	/*
+			    	$(document).ready(function() {
+			      	//var f = document.getElementById('foo');
+			      	//f.onclick = showFoo;
+
+			      	function showFoo() {
+			      		alert('I am foo!');
+			      		return false;
+			      	};
+			      });
+						*/
+			    </script>
+			    <!--
+	          <a href="#" title="Get some foo!" id="foo">
+	            Other
+	          </a>
+	        -->
+      <script>
+				/*
+				$(document).ready(function() {
+			    $('input[type!="button"][type!="submit"], select, textarea')
+			         .val('')
+			         .blur();
+				});
+				*/
+			</script>
+
 	<!-- THIS IS REALLY COOL, BUT CAN"T USE IT IN THIS BECAUSE IT MESSES UP MY PROGRESSBAR OBJECT -->
   <%= link_to "Put Action", progressbar_update_path(:progressbar_obj => @progressbar_obj), :method=>:post, remote:true %>
 

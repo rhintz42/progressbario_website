@@ -1,8 +1,11 @@
 
 $(document).ready(function() {
     var progressbarObj = new Object;
+    var progressbarObjJSON = "{}";
 
     <% if @progressbar_obj_json then %>
+
+      var progressbarObjJSON = '<%= raw @progressbar_obj_json %>';
       progressbarObj = JSON.parse('<%= raw @progressbar_obj_json %>');
     <% end %>
 
@@ -17,6 +20,13 @@ $(document).ready(function() {
                                          margin-right: auto;\
                                          background-color: white;">\
                                     </div>');
+
+    var div2 = $("#progressbar_output");
+    div2.remove();
+
+    $("#progressbar_output_container").append('<div id="progressbar_output">\
+                                                    var progressbarInput=' + progressbarObjJSON + '\
+                                               </div>');
     
     var progressbar = new Progressbar(progressbarObj);
 });
