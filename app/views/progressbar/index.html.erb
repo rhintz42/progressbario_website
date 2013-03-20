@@ -125,18 +125,20 @@
         </li>
       </ul>
       <script>
+				/*
 				$(document).ready(function() {
 			    $('input[type!="button"][type!="submit"], select, textarea')
 			         .val('')
 			         .blur();
 				});
+				*/
 			</script>
 
 			<div id="tabs-1">
 				<div>
 					<%= label_tag(:currentNum, "Current Number") %>
 					<%= text_field_tag(:currentNum,
-														 0,
+														 50,
 														 :size => 14,
 														 :onchange => "changeCurrentNum();") %>
 				</div>
@@ -150,7 +152,7 @@
 				<div>
 					<%= label_tag(:maximumNum, "Maximum Number") %>
 					<%= text_field_tag(:maximumNum,
-														 0,
+														 100,
 														 :size => 14,
 														 :onchange => "changeMaximumNum();") %>
 				</div>
@@ -208,7 +210,7 @@
 					<script src="assets/progressbar_container.js"></script>
 					<script src="assets/progressbar.js"></script>
 					-->
-					<script src="http://progressbar-io.googlecode.com/files/progressbario-v1.0.2.js"></script>
+					<script src="http://progressbar-io.googlecode.com/files/progressbario-v1.0.5.js"></script>
 					
 
 					<script>
@@ -223,50 +225,62 @@
 					    }).done(function() {
 
 					    });
-					  }
+					  };
 
 					  function loadMessages() {
 					  	if(progressbarObj["messages"] == undefined) {
 					  		progressbarObj["messages"] = [];
 					  	}
-					  }
+					  };
 
 					  function loadProgressbarFillDetails() {
 					  	if(progressbarObj["progressbarFillDetails"] == undefined) {
 					  		progressbarObj["progressbarFillDetails"] = new Object;
 					  	}
-					  }
+					  };
 
-					  function changeCurrentNum() {
-							var currentNumObj = document.getElementById("currentNum");
+					  function updateCurrentNum() {
+					  	var currentNumObj = document.getElementById("currentNum");
 							var currentNum = parseInt(currentNumObj.value);
+
+							var currentNumField = $('#currentNum');
 
 							loadProgressbarFillDetails();
 					    
 					    progressbarObj["progressbarFillDetails"]["clientNumCurrent"] = currentNum;
-					    
+					  };
+
+					  function changeCurrentNum() {
+					    updateCurrentNum();
 					    makeProgressbarObjAjaxCall();
 						};
 
-						function changeMinimumNum() {
+						function updateMinimumNum() {
 							var minimumNumObj = document.getElementById("minimumNum");
 							var minimumNum = parseInt(minimumNumObj.value);
 
 					    loadProgressbarFillDetails();
 					    
 					    progressbarObj["progressbarFillDetails"]["clientNumMin"] = minimumNum;
+						};
+
+						function changeMinimumNum() {
+							updateMinimumNum();
 
 					    makeProgressbarObjAjaxCall();
 						};
 
-						function changeMaximumNum() {
+						function updateMaximumNum() {
 							var maximumNumObj = document.getElementById("maximumNum");
 							var maximumNum = parseInt(maximumNumObj.value);
 
 						  loadProgressbarFillDetails();
 					    
 					    progressbarObj["progressbarFillDetails"]["clientNumMax"] = maximumNum;
+						}
 
+						function changeMaximumNum() {
+							updateMaximumNum();
 					    makeProgressbarObjAjaxCall();
 					  };
 
@@ -350,7 +364,11 @@
 					  	makeProgressbarObjAjaxCall();
 					  };
 
-					  <%= render :template=>"progressbar/update.js.erb" %>
+					  updateCurrentNum();
+					  updateMinimumNum();
+					  updateMaximumNum();
+					  makeProgressbarObjAjaxCall();
+					  //<%= render :template=>"progressbar/update.js.erb" %>
 					</script>
         </div>
       </div>
