@@ -26,4 +26,16 @@ class ProgressbarController < ApplicationController
       format.js
     end
   end
+
+  def about
+
+  end
+
+  def api
+
+  end
+
+  def contact
+
+  end
 end

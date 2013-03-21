@@ -1,6 +1,10 @@
 RailsProgressbarIo::Application.routes.draw do
   match "progressbar" => "progressbar#index"
   match "progressbar/update" => "progressbar#update", :via => :post
+  match "progressbar/about" => "progressbar#about"
+  match "progressbar/api" => "progressbar#api"
+  match "progressbar/contact" => "progressbar#contact"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
