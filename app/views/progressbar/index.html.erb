@@ -52,7 +52,7 @@
       </a>
     	</div>
     	<div style="float: right;">
-				<img src="assets/progressbar_pic.png" style=" width: 200px; height: 261px;">
+				<img src="assets/progressbar_pic.png" style=" width: 150px; height: 261px;">
     	</div>
     	<div style="clear: both;">
     	</div>
@@ -419,45 +419,44 @@
   </div>
     <hr>
 
-<div id="progressbar_output_container" style="clear:both;">
-	<div id="output_description" style="font-size: 20px;">
-		<div>
-			<p>Adding this progressbar to your site is as easy as Select, Copy and Paste!</p>
+<div style="clear: both;border: solid;">
+	<div id="progressbar_output_container" style="clear:both; margin: 10px;">
+		<div id="output_description" style="font-size: 20px;">
+			<div>
+				<p>Adding this progressbar to your site is as easy as Select, Copy and Paste!</p>
+			</div>
+			<div>
+				<p>Copy the below code and insert it into the html of your site!</p>
+			</div>
 		</div>
-		<div>
-			<p>Copy the below code and insert it into the html of your site!</p>
-		</div>
-	</div>
 
-	<div id="add_in_container">
-		&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
+		<div id="add_in_container">
+			&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
+		</div>
+		<div id="progressbar_output_include_kinect">
+			&lt;script src=&quot;http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.3.1.min.js&quot;&gt;&lt;/script&gt;
+		</div>
+		<div id="progressbar_output_include_progressbar_google">
+			&lt;script src=&quot;http://progressbar-io.googlecode.com/files/progressbario-v1.0.6.js&quot;&gt;&lt;/script&gt;
+		</div>
+		<div id="script_tag">
+			&lt;script&gt;
+		</div>
+		<div id="progressbar_output" style="margin: 20px;">
+			This is where the progressbar output goes
+		</div>
 	</div>
-	<div id="progressbar_output_include_kinect">
-		&lt;script src=&quot;http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.3.1.min.js&quot;&gt;&lt;/script&gt;
+	<div id="progressbar_output_container_ending" style="clear:both; margin: 10px;">
+		<div id="progressbar_obj_creation" style="margin: 20px;">
+			var progressbar = new Progressbar(progressbarInput);
+		</div>
+		<div id="script_end_tag">
+			&lt;/script&gt;
+		</div>
 	</div>
-	<div id="progressbar_output_include_progressbar_google">
-		&lt;script src=&quot;http://progressbar-io.googlecode.com/files/progressbario-v1.0.6.js&quot;&gt;&lt;/script&gt;
-	</div>
-	<div id="script_tag">
-		&lt;script&gt;
-	</div>
-	<div id="progressbar_output">
-		This is where the progressbar output goes
-	</div>
-</div>
-<div id="progressbar_output_container_ending" style="clear:both">
-	<div id="progressbar_obj_creation">
-		var progressbar = new Progressbar(progressbarInput);
-	</div>
-	<div id="script_end_tag">
-		&lt;/script&gt;
-	</div>
-</div>
-  <div style="clear: both; height: 300px;">
-    <div>
-      
-    </div>
+  <div style="clear: both; height: 100px;">
   </div>
+</div>
 
   <script src="assets/js/bootstrap.js"></script>
 </div>
